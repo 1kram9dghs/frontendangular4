@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <!-- Brand -->
+  <a class="navbar-brand" href="#">Gestion Livres</a>
+
+  <!-- Links -->
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/livres">Home</a>
+    </li>
+
+    <!-- Dropdown -->
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#"  id="navbardrop" role="button"
+      data-bs-toggle="dropdown" aria-expanded="false">
+        Livres
+      </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="#">Ajouter</a>
+        <a class="dropdown-item" routerLink="/livres"   *ngIf="keycloakService.getUserRoles().includes('ADMIN')"   >Lister</a>      
+      </div>
+    </li>
+  </ul>
+    
+  <ul class="navbar-nav ms-auto"> 
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#"  id="navbardrop" role="button"
+      data-bs-toggle="dropdown" aria-expanded="false">
+        <span *ngIf="profile; else notLoggedIn">
+          {{profile.username}}
+        </span>
+        <ng-template #notLoggedIn>
+          <button class="btn btn-success" (click)="onLogin()">Login</button>
+        </ng-template>
+      </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" (click)="onLogout()">Logout</a>
+        <a class="dropdown-item" href="#">Profile</a>
+      </div>
+    </li>
+  </ul>
+</nav>
+
+<router-outlet></router-outlet>
